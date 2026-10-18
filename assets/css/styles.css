@@ -645,6 +645,206 @@ a {
   }
 }
 
+.page--thanks {
+  min-height: 100vh;
+  background: #f6f7f4;
+  overflow: hidden;
+}
+
+.page--thanks::before,
+.page--thanks::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.page--thanks::before {
+  background: var(--green);
+  clip-path: polygon(64% 0, 100% 0, 100% 100%, 36% 100%);
+}
+
+.page--thanks::after {
+  background: var(--yellow);
+  clip-path: polygon(61% 0, 65.5% 0, 37.5% 100%, 33% 100%);
+}
+
+.thanks__logo {
+  position: fixed;
+  z-index: 2;
+  top: 1.3rem;
+  left: 1.4rem;
+}
+
+.thanks__logo img {
+  width: 148px;
+  height: auto;
+}
+
+.thanks__logo .logo--dark {
+  display: none;
+}
+
+html[data-theme="dark"] .thanks__logo .logo--light {
+  display: none;
+}
+
+html[data-theme="dark"] .thanks__logo .logo--dark {
+  display: block;
+}
+
+.thanks {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 5.5rem 1.25rem 2rem;
+}
+
+.thanks__card {
+  width: min(26rem, 100%);
+  padding: 2.5rem 2rem 2rem;
+  background: #fff;
+  border-radius: 1.35rem;
+  box-shadow: 0 28px 60px rgba(28, 28, 28, 0.1);
+  text-align: center;
+}
+
+.thanks__theme {
+  position: fixed;
+  z-index: 2;
+  top: 1.3rem;
+  right: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.7rem;
+  height: 2.7rem;
+  padding: 0;
+  border: 1px solid rgba(28, 28, 28, 0.12);
+  border-radius: 999px;
+  background: #fff;
+  color: #1c1c1c;
+  cursor: pointer;
+}
+
+.thanks__theme svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+html[data-theme="dark"] .thanks__theme .theme-toggle__moon,
+html:not([data-theme="dark"]) .thanks__theme .theme-toggle__sun {
+  display: none;
+}
+
+.thanks__mark {
+  display: inline-grid;
+  place-items: center;
+  width: 4.6rem;
+  height: 4.6rem;
+  margin-bottom: 0.4rem;
+  color: #595a5c;
+}
+
+.thanks__mark svg {
+  width: 4.6rem;
+  height: 4.6rem;
+}
+
+.page--thanks h1 {
+  margin: 0.35rem 0 0.7rem;
+  color: #1c1c1c;
+  font-size: clamp(1.8rem, 3vw, 2.15rem);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.thanks__card p {
+  margin: 0 auto;
+  max-width: 28ch;
+  color: #595a5c;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.page--thanks .btn {
+  margin: 1.45rem 0 0.85rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: 0.35rem;
+  letter-spacing: 0.08em;
+}
+
+.page--thanks .btn:hover,
+.page--thanks .btn:focus-visible {
+  background: var(--green);
+  color: #fff;
+}
+
+.thanks__again {
+  display: block;
+  color: var(--green-ink);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.thanks__again:hover,
+.thanks__again:focus-visible {
+  color: #2f5518;
+}
+
+.thanks__slogan {
+  margin-top: 1.15rem !important;
+  font-family: var(--font-slogan);
+  font-size: 0.95rem !important;
+  color: #1c1c1c !important;
+  max-width: none !important;
+}
+
+html[data-theme="dark"] .page--thanks {
+  background: #141516;
+}
+
+html[data-theme="dark"] .page--thanks::before {
+  background: #595a5c;
+}
+
+html[data-theme="dark"] .thanks__theme {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: #1e2022;
+  color: #f4f4f2;
+}
+
+html[data-theme="dark"] .thanks__card {
+  background: #1e2022;
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.35);
+}
+
+html[data-theme="dark"] .page--thanks h1,
+html[data-theme="dark"] .thanks__slogan {
+  color: #f4f4f2 !important;
+}
+
+html[data-theme="dark"] .thanks__card p {
+  color: #c6c6c3;
+}
+
+html[data-theme="dark"] .thanks__mark {
+  color: #f4f4f2;
+}
+
+html[data-theme="dark"] .thanks__again {
+  color: #b7dc86;
+}
+
+html[data-theme="dark"] .thanks__again:hover,
+html[data-theme="dark"] .thanks__again:focus-visible {
+  color: #d4efb0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

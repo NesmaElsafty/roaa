@@ -33,7 +33,7 @@
     </div>
     <a class="skip-link" href="#content">Skip to content</a>
     <header class="topbar">
-      <a class="brand" href="index.html"><img src="assets/images/logo.png" alt="ROAA Construction and Finishing" /></a>
+      <a class="brand" href="index.html"><img class="logo--light" src="assets/lightmode-logo.png" alt="ROAA Construction and Finishing" /><img class="logo--dark" src="assets/darkmode-logo.png" alt="ROAA Construction and Finishing" /></a>
       <nav class="menu" id="menu" aria-label="Primary">
         <a href="about.html">About Us</a>
         <a href="allies.html">Allies of Success</a>
@@ -69,47 +69,78 @@
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><span></span></button>
     </header>
 
-    <main id="content" class="wrap page-hero">
-      <p class="kicker">Contact</p>
-      <h1>Tell us what you want to build</h1>
-      <span class="rule"></span>
-      <div class="contact-grid section">
-        <form class="form card" data-contact novalidate>
-          <label class="field"><span>Name</span><input name="name" required autocomplete="name" /><p class="field__error" hidden></p></label>
-          <label class="field"><span>Email</span><input name="email" type="email" required autocomplete="email" /><p class="field__error" hidden></p></label>
-          <label class="field"><span>Phone</span><input name="phone" type="tel" required autocomplete="tel" /><p class="field__error" hidden></p></label>
-          <label class="field"><span>Sector</span>
-            <select name="sector" required>
-              <option value="">Select a sector</option>
-              <option>Corporate</option>
-              <option>Hospitality</option>
-              <option>Commercial</option>
-              <option>Residential</option>
-            </select>
-            <p class="field__error" hidden></p>
-          </label>
-          <label class="field"><span>Message</span><textarea name="message" required></textarea><p class="field__error" hidden></p></label>
-          <button class="btn" type="submit">Send message</button>
-        </form>
-        <aside class="contact-card">
-          <h2>Studio</h2>
-          <p>6064, Cluster 6, Mearag<br />New Maadi, Cairo, Egypt</p>
-          <p><a href="tel:+201119544405">+20 11 1954 4405</a><br /><a href="tel:+201111115386">+20 11 1111 5386</a></p>
-          <p><a href="mailto:info@roaa-construction.com">info@roaa-construction.com</a></p>
-          <p><a href="https://wa.me/201119544405">WhatsApp</a></p>
-        </aside>
+    <main id="content" class="contact-page">
+      <div class="wrap">
+        <section class="contact-panel" data-reveal>
+          <div class="contact-panel__copy">
+            <p class="contact-pill">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6.5h14v9.2H8.2L5 18.2V6.5Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8 10h8M8 13h5" stroke="currentColor" stroke-width="1.7"/></svg>
+              Start a project
+            </p>
+            <div>
+              <h1>Tell us what you want to build</h1>
+              <p>Write to ROAA Construction and Finishing in New Maadi, Cairo. Share the space you have in mind, or reach the studio directly.</p>
+            </div>
+            <ul class="contact-points">
+              <li>
+                <span class="contact-points__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4.5h2.2l1.1 2.6-1.5 1a12 12 0 0 0 5.1 5.1l1-1.5 2.6 1.1V17a1.5 1.5 0 0 1-1.6 1.5A14 14 0 0 1 6.5 6.1 1.5 1.5 0 0 1 8 4.5Z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+                <span><a href="tel:+201119544405">+20 11 1954 4405</a><br /><a href="tel:+201111115386">+20 11 1111 5386</a></span>
+              </li>
+              <li>
+                <button class="contact-map-open" type="button" data-map-open>
+                  <span class="contact-points__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-10a6 6 0 1 0-12 0c0 4.8 6 10 6 10Z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="11" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+                  <span>6064, Cluster 6, Mearag<br />New Maadi, Cairo, Egypt</span>
+                </button>
+              </li>
+              <li>
+                <span class="contact-points__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5h16v10H4v-10Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5 8.2 12 13l7-4.8" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
+                <a href="mailto:info@roaa-construction.com">info@roaa-construction.com</a>
+              </li>
+              
+            </ul>
+          </div>
+          <form class="form contact-panel__form" data-contact novalidate>
+            <label class="field"><span>Your name</span><input name="name" required autocomplete="name" placeholder="Name" /><p class="field__error" hidden></p></label>
+            <label class="field"><span>Your phone</span><input name="phone" type="tel" required autocomplete="tel" placeholder="Phone" /><p class="field__error" hidden></p></label>
+            <label class="field"><span>Email</span><input name="email" type="email" required autocomplete="email" placeholder="Email" /><p class="field__error" hidden></p></label>
+            <label class="field"><span>Sector</span>
+              <select name="sector" required>
+                <option value="">Select a sector</option>
+                <option>Corporate</option>
+                <option>Hospitality</option>
+                <option>Commercial</option>
+                <option>Residential</option>
+              </select>
+              <p class="field__error" hidden></p>
+            </label>
+            <label class="field"><span>Message</span><textarea name="message" required placeholder="Message"></textarea><p class="field__error" hidden></p></label>
+            <button class="contact-submit" type="submit">
+              <span class="contact-submit__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h12M13 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span>
+              Send message
+            </button>
+          </form>
+        </section>
       </div>
     </main>
+
+    <dialog class="map-popup" data-map aria-labelledby="map-title">
+      <form method="dialog"><button type="submit" aria-label="Close">X</button></form>
+      <iframe title="Map showing 6064, Cluster 6, Mearag, New Maadi, Cairo" data-src="https://www.openstreetmap.org/export/embed.html?bbox=31.291229%2C29.962051%2C31.321229%2C29.992051&amp;layer=mapnik&amp;marker=29.977051%2C31.306229" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="map-popup__foot">
+        <p>6064, Cluster 6, Mearag, New Maadi, Cairo, Egypt</p>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=29.977051,31.306229" target="_blank" rel="noopener noreferrer">View in Google Maps</a>
+      </div>
+    </dialog>
 
     <footer class="footer">
       <div class="wrap footer__grid">
         <div>
-          <img src="assets/images/logo.png" alt="ROAA Construction and Finishing" width="180" />
+          <img src="assets/darkmode-logo.png" alt="ROAA Construction and Finishing" width="180" />
           <p class="slogan">You Dream It, We Build It</p>
         </div>
         <div>
           <h2>Visit</h2>
-          <p>6064, Cluster 6, Mearag<br />New Maadi, Cairo, Egypt</p>
+          <p><button class="footer-map-open" type="button" data-map-open>6064, Cluster 6, Mearag<br />New Maadi, Cairo, Egypt</button></p>
         </div>
         <div>
           <h2>Talk</h2>
@@ -127,7 +158,7 @@
           </ul>
         </div>
       </div>
-      <div class="wrap legal">© <span data-year>2026</span> ROAA Construction and Finishing. ISO 9001:2015.</div>
+      <div class="wrap legal">© <span data-year>2026</span> ROAA Construction and Finishing.</div>
     </footer>
     <script src="assets/js/site.js"></script>
   </body>

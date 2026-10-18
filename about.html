@@ -33,7 +33,7 @@
     </div>
     <a class="skip-link" href="#content">Skip to content</a>
     <header class="topbar">
-      <a class="brand" href="index.html"><img src="assets/images/logo.png" alt="ROAA Construction and Finishing" /></a>
+      <a class="brand" href="index.html"><img class="logo--light" src="assets/lightmode-logo.png" alt="ROAA Construction and Finishing" /><img class="logo--dark" src="assets/darkmode-logo.png" alt="ROAA Construction and Finishing" /></a>
       <nav class="menu" id="menu" aria-label="Primary">
         <a href="about.html" aria-current="page">About Us</a>
         <a href="allies.html">Allies of Success</a>
@@ -77,6 +77,7 @@
           <li><a href="#mission">Our Mission</a></li>
           <li><a href="#vision">Our Vision</a></li>
           <li><a href="#expertise">Our Area of Expertise</a></li>
+          <li><a href="#iso">ISO Certification</a></li>
         </ul>
       </section>
 
@@ -152,12 +153,33 @@
           <img src="assets/images/about/p7.jpg" alt="Architectural model, blueprints, level, and tape measure on a studio table" />
         </figure>
       </section>
+
+      <section class="story story--charcoal story--certs" id="iso">
+        <div class="story__copy">
+          <h2>ISO Certification</h2>
+          <span class="rule"></span>
+          <p>ISO 9001:2015 for construction and finishing works. Certificate No. UKS-QMS-25-107, registered 29.07.2025 and valid until 28.07.2026.</p>
+        </div>
+        <div class="certs">
+          <button type="button" data-lightbox>
+            <img src="assets/images/about/iso-uks.png" alt="UKS Egypt certificate of conformance for ISO 9001:2015, issued to ROAA for Integrated Contracting" />
+          </button>
+          <button type="button" data-lightbox>
+            <img src="assets/images/about/iso-eos.jpeg" alt="Egyptian Organization for Standardization and Quality registration of ISO 9001:2015 certificate UKS-QMS-25-107" />
+          </button>
+        </div>
+        <svg class="story__skyline" viewBox="0 0 640 90" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="1.2"><path d="M8 80 V48 H28 V62 H48 V34 H74 V80 M90 80 V52 H116 V38 H140 V64 H164 V80 M176 80 V28 H200 V46 H220 V22 H244 V80 M260 80 V50 H286 V36 H312 V58 H338 V80"/></g></svg>
+      </section>
     </main>
+    <dialog class="lightbox">
+      <form method="dialog"><button class="btn" type="submit" data-close>Close</button></form>
+      <img alt="" />
+    </dialog>
 
     <footer class="footer">
       <div class="wrap footer__grid">
         <div>
-          <img src="assets/images/logo.png" alt="ROAA Construction and Finishing" width="180" />
+          <img src="assets/darkmode-logo.png" alt="ROAA Construction and Finishing" width="180" />
           <p class="slogan">You Dream It, We Build It</p>
         </div>
         <div>
@@ -180,7 +202,7 @@
           </ul>
         </div>
       </div>
-      <div class="wrap legal">© <span data-year>2026</span> ROAA Construction and Finishing. ISO 9001:2015.</div>
+      <div class="wrap legal">© <span data-year>2026</span> ROAA Construction and Finishing.</div>
     </footer>
     <script src="assets/js/site.js"></script>
   </body>

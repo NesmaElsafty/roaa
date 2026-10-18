@@ -33,7 +33,7 @@
     </div>
     <a class="skip-link" href="#content">Skip to content</a>
     <header class="topbar">
-      <a class="brand" href="index.html"><img src="assets/images/logo.png" alt="ROAA Construction and Finishing" /></a>
+      <a class="brand" href="index.html"><img class="logo--light" src="assets/lightmode-logo.png" alt="ROAA Construction and Finishing" /><img class="logo--dark" src="assets/darkmode-logo.png" alt="ROAA Construction and Finishing" /></a>
       <nav class="menu" id="menu" aria-label="Primary">
         <a href="about.html">About Us</a>
         <a href="allies.html">Allies of Success</a>
@@ -74,7 +74,20 @@
       <h1>Work, by category</h1>
       <span class="rule"></span>
       <p class="lede">Photographs from the ROAA project profile. Choose a category, or browse the full set.</p>
-      <div class="filters" data-filters></div>
+      <div class="filter-slider">
+        <div class="filter-slider__row">
+          <button class="filter-slider__arrow" type="button" data-filter-prev aria-label="Previous categories">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6 L8.5 12 L14.5 18" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+          </button>
+          <div class="filter-slider__view">
+            <div class="filters" data-filters></div>
+          </div>
+          <button class="filter-slider__arrow" type="button" data-filter-next aria-label="Next categories">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6 L15.5 12 L9.5 18" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+          </button>
+        </div>
+        <div class="filter-slider__dots" data-filter-dots></div>
+      </div>
       <div class="gallery-grid" data-gallery></div>
     </main>
     <dialog class="lightbox">
@@ -85,7 +98,7 @@
     <footer class="footer">
       <div class="wrap footer__grid">
         <div>
-          <img src="assets/images/logo.png" alt="ROAA Construction and Finishing" width="180" />
+          <img src="assets/darkmode-logo.png" alt="ROAA Construction and Finishing" width="180" />
           <p class="slogan">You Dream It, We Build It</p>
         </div>
         <div>
@@ -108,7 +121,7 @@
           </ul>
         </div>
       </div>
-      <div class="wrap legal">© <span data-year>2026</span> ROAA Construction and Finishing. ISO 9001:2015.</div>
+      <div class="wrap legal">© <span data-year>2026</span> ROAA Construction and Finishing.</div>
     </footer>
     <script src="assets/js/gallery-data.js"></script>
     <script src="assets/js/site.js"></script>
