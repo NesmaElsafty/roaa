@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gallery | ROAA Construction and Finishing</title>
+    <meta name="description" content="Project photography by category: banks, clinics, hospitality, homes, landscape, and finishes." />
+    <meta name="theme-color" content="#76b142" />
+    <script>
+      try {
+        var saved = localStorage.getItem("roaa-theme");
+        var theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/site.css" />
+  </head>
+  <body class="site">
+    <div class="loader" role="status" aria-live="polite" aria-label="Loading ROAA">
+      <svg class="loader__building" viewBox="0 0 160 120" fill="none" aria-hidden="true">
+        <path pathLength="100" d="M12 104 H148" />
+        <path pathLength="100" d="M24 104 V62 H52 V104" />
+        <path pathLength="100" d="M64 104 V28 H100 V104" />
+        <path pathLength="100" d="M112 104 V54 H140 V104" />
+        <path pathLength="100" d="M32 76 H42 M32 88 H42" />
+        <path pathLength="100" d="M74 42 H82 M90 42 H98 M74 56 H82 M90 56 H98 M74 70 H82 M90 70 H98 M74 84 H82 M90 84 H98" />
+        <path pathLength="100" d="M120 68 H132 M120 82 H132" />
+      </svg>
+      <p class="loader__slogan">You Dream It, We Build It</p>
+    </div>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <header class="topbar">
+      <a class="brand" href="index.html"><img src="assets/images/logo.png" alt="ROAA Construction and Finishing" /></a>
+      <nav class="menu" id="menu" aria-label="Primary">
+        <a href="about.html">About Us</a>
+        <a href="allies.html">Allies of Success</a>
+        <div class="menu__dropwrap">
+          <a href="gallery.html" aria-current="page">Gallery</a>
+          <button class="menu__caret" type="button" aria-expanded="false" aria-label="Open gallery categories"></button>
+          <div class="menu__panel">
+            <a href="gallery.html#banks">Banks</a>
+            <a href="gallery.html#clinics">Clinics</a>
+            <a href="gallery.html#intercontinental">Intercontinental</a>
+            <a href="gallery.html#dairy-queen">Dairy Queen</a>
+            <a href="gallery.html#harris-cafe">Harris Cafe</a>
+            <a href="gallery.html#vintage">Vintage</a>
+            <a href="gallery.html#modern">Modern</a>
+            <a href="gallery.html#landscape">Landscape</a>
+            <a href="gallery.html#swimming-pools">Swimming Pools</a>
+            <a href="gallery.html#hardscape">Hardscape</a>
+            <a href="gallery.html#marble-floors">Marble Floors</a>
+            <a href="gallery.html#wooden-floors">Wooden Floors</a>
+            <a href="gallery.html#hotels-residential">Hotels & Residential</a>
+            <a href="gallery.html#stairs">Stairs Finishing</a>
+            <a href="gallery.html#ceiling-lighting">Ceiling, Lighting & Security</a>
+          </div>
+        </div>
+        <a href="projects.html">Our Projects</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+        <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4" stroke="currentColor" stroke-width="1.8"/></svg>
+        <svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16 3.2A8.5 8.5 0 1 0 20.8 14 7 7 0 0 1 16 3.2Z" stroke="currentColor" stroke-width="1.8"/></svg>
+      </button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><span></span></button>
+    </header>
+
+    <main id="content" class="wrap page-hero">
+      <p class="kicker">Gallery</p>
+      <h1>Work, by category</h1>
+      <span class="rule"></span>
+      <p class="lede">Photographs from the ROAA project profile. Choose a category, or browse the full set.</p>
+      <div class="filters" data-filters></div>
+      <div class="gallery-grid" data-gallery></div>
+    </main>
+    <dialog class="lightbox">
+      <form method="dialog"><button class="btn" type="submit" data-close>Close</button></form>
+      <img alt="" />
+    </dialog>
+
+    <footer class="footer">
+      <div class="wrap footer__grid">
+        <div>
+          <img src="assets/images/logo.png" alt="ROAA Construction and Finishing" width="180" />
+          <p class="slogan">You Dream It, We Build It</p>
+        </div>
+        <div>
+          <h2>Visit</h2>
+          <p>6064, Cluster 6, Mearag<br />New Maadi, Cairo, Egypt</p>
+        </div>
+        <div>
+          <h2>Talk</h2>
+          <p><a href="tel:+201119544405">+20 11 1954 4405</a></p>
+          <p><a href="tel:+201111115386">+20 11 1111 5386</a></p>
+          <p><a href="mailto:info@roaa-construction.com">info@roaa-construction.com</a></p>
+        </div>
+        <div>
+          <h2>Explore</h2>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="projects.html">Our Projects</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="wrap legal">© <span data-year>2026</span> ROAA Construction and Finishing. ISO 9001:2015.</div>
+    </footer>
+    <script src="assets/js/gallery-data.js"></script>
+    <script src="assets/js/site.js"></script>
+  </body>
+</html>
