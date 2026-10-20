@@ -59,7 +59,11 @@
           </div>
         </div>
         <a href="projects.html">Our Projects</a>
-        <a href="services.html">Services</a>
+        <div class="menu__dropwrap">
+          <a href="services.html">Services &amp; products</a>
+          <button class="menu__caret" type="button" aria-expanded="false" aria-label="Open services sections"></button>
+          <div class="menu__panel menu__panel--pair"><a href="services.html#services">Services</a> <span>&amp;</span> <a href="services.html#products">products</a></div>
+        </div>
         <a href="contact.html" aria-current="page">Contact Us</a>
       </nav>
       <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
@@ -99,7 +103,11 @@
               
             </ul>
           </div>
-          <form class="form contact-panel__form" data-contact novalidate>
+          <form class="form contact-panel__form" data-contact data-endpoint="https://formsubmit.co/ajax/info@roaa-construction.com" action="thank-you.html" method="POST" novalidate>
+            <input type="hidden" name="_subject" value="ROAA website enquiry" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="contact-honey" aria-hidden="true" />
             <label class="field"><span>Your name</span><input name="name" required autocomplete="name" placeholder="Name" /><p class="field__error" hidden></p></label>
             <label class="field"><span>Your phone</span><input name="phone" type="tel" required autocomplete="tel" placeholder="Phone" /><p class="field__error" hidden></p></label>
             <label class="field"><span>Email</span><input name="email" type="email" required autocomplete="email" placeholder="Email" /><p class="field__error" hidden></p></label>
@@ -125,40 +133,36 @@
 
     <dialog class="map-popup" data-map aria-labelledby="map-title">
       <form method="dialog"><button type="submit" aria-label="Close">X</button></form>
-      <iframe title="Map showing 6064, Cluster 6, Mearag, New Maadi, Cairo" data-src="https://www.openstreetmap.org/export/embed.html?bbox=31.291229%2C29.962051%2C31.321229%2C29.992051&amp;layer=mapnik&amp;marker=29.977051%2C31.306229" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe title="Map showing 6064, Cluster 6, Mearag, New Maadi, Cairo" data-src="https://www.openstreetmap.org/export/embed.html?bbox=31.300674%2C29.962238%2C31.330674%2C29.992238&amp;layer=mapnik&amp;marker=29.97723854631201%2C31.315674389852347" referrerpolicy="no-referrer-when-downgrade"></iframe>
       <div class="map-popup__foot">
         <p>6064, Cluster 6, Mearag, New Maadi, Cairo, Egypt</p>
-        <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=29.977051,31.306229" target="_blank" rel="noopener noreferrer">View in Google Maps</a>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=29.97723854631201,31.315674389852347" target="_blank" rel="noopener noreferrer">View in Google Maps</a>
       </div>
     </dialog>
 
-    <footer class="footer">
-      <div class="wrap footer__grid">
-        <div>
-          <img src="assets/darkmode-logo.png" alt="ROAA Construction and Finishing" width="180" />
-          <p class="slogan">You Dream It, We Build It</p>
+        <footer class="footer">
+      <div class="wrap footer__bar">
+                <div class="footer__brand">
+          <a href="index.html"><img src="assets/darkmode-logo.png" alt="ROAA Construction and Finishing" /></a>
+          <p class="footer__slogan">You Dream It, We Build It</p>
         </div>
-        <div>
-          <h2>Visit</h2>
-          <p><button class="footer-map-open" type="button" data-map-open>6064, Cluster 6, Mearag<br />New Maadi, Cairo, Egypt</button></p>
+        <div class="footer__content">
+          <p><button class="footer-map-open" type="button" data-map-open>6064, Cluster 6, Mearag, New Maadi, Cairo, Egypt</button></p>
+        <p><a href="tel:+201119544405">+20 11 1954 4405</a> - <a href="tel:+201111115386">+20 11 1111 5386</a></p>
+        <p><a href="mailto:info@roaa-construction.com">info@roaa-construction.com</a></p>
+        <div class="footer__social">
+          <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 9h3V6h-3c-1.9 0-3 1.3-3 3v2H9v3h2v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm5 4.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5zm5.2-.9a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1zM12 9.5A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5z"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.2 9.5H3.4V20h2.8V9.5zM4.8 4A1.65 1.65 0 1 0 4.8 7.3 1.65 1.65 0 0 0 4.8 4zM20.6 20h-2.8v-5.6c0-1.5-.5-2.5-1.8-2.5a1.95 1.95 0 0 0-1.8 1.3 2.3 2.3 0 0 0-.1.9V20H11.3s.05-9.3 0-10.5h2.8v1.7c.5-.8 1.4-1.9 3.5-1.9 2.5 0 4 1.6 4 5.1V20z"/></svg>
+          </a>
         </div>
-        <div>
-          <h2>Talk</h2>
-          <p><a href="tel:+201119544405">+20 11 1954 4405</a></p>
-          <p><a href="tel:+201111115386">+20 11 1111 5386</a></p>
-          <p><a href="mailto:info@roaa-construction.com">info@roaa-construction.com</a></p>
-        </div>
-        <div>
-          <h2>Explore</h2>
-          <ul>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="projects.html">Our Projects</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
         </div>
       </div>
-      <div class="wrap legal">© <span data-year>2026</span> ROAA Construction and Finishing.</div>
     </footer>
     <script src="assets/js/site.js"></script>
   </body>

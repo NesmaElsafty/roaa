@@ -74,56 +74,25 @@
   if (year) year.textContent = String(new Date().getFullYear());
 
   var galleryRoot = document.querySelector("[data-gallery]");
-  if (galleryRoot && window.ROAA_GALLERY) {
+  var projectsRoot = document.querySelector("[data-projects]");
+
+  function initCategoryTabs(categories, onShow) {
     var filters = document.querySelector("[data-filters]");
-    var current = "all";
+    if (!filters || !categories || !categories.length) return;
 
-    function paintFilters() {
-      var all = document.createElement("button");
-      all.type = "button";
-      all.textContent = "All";
-      all.dataset.slug = "all";
-      filters.appendChild(all);
-      window.ROAA_GALLERY.forEach(function (group) {
-        var button = document.createElement("button");
-        button.type = "button";
-        button.textContent = group.label;
-        button.dataset.slug = group.slug;
-        filters.appendChild(button);
-      });
-      filters.addEventListener("click", function (event) {
-        var button = event.target.closest("button");
-        if (!button) return;
-        location.hash = button.dataset.slug === "all" ? "" : button.dataset.slug;
-        show(button.dataset.slug);
-      });
-    }
+    var all = document.createElement("button");
+    all.type = "button";
+    all.textContent = "All";
+    all.dataset.slug = "all";
+    filters.appendChild(all);
+    categories.forEach(function (group) {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.textContent = group.label;
+      button.dataset.slug = group.slug;
+      filters.appendChild(button);
+    });
 
-    function show(slug) {
-      current = slug || "all";
-      filters.querySelectorAll("button").forEach(function (button) {
-        button.setAttribute("aria-pressed", button.dataset.slug === current ? "true" : "false");
-      });
-      galleryRoot.innerHTML = "";
-      window.ROAA_GALLERY.forEach(function (group) {
-        if (current !== "all" && group.slug !== current) return;
-        group.images.forEach(function (src, index) {
-          var button = document.createElement("button");
-          button.type = "button";
-          var img = document.createElement("img");
-          img.src = src;
-          img.alt = group.label + " project " + (index + 1) + " by ROAA";
-          button.appendChild(img);
-          button.addEventListener("click", function () {
-            openLightbox(src, img.alt);
-          });
-          galleryRoot.appendChild(button);
-        });
-      });
-      if (typeof showActiveFilter === "function") showActiveFilter();
-    }
-
-    paintFilters();
     var filterView = filters.parentElement;
     var filterPrev = document.querySelector("[data-filter-prev]");
     var filterNext = document.querySelector("[data-filter-next]");
@@ -137,6 +106,7 @@
     }
 
     function paintFilterDots(page, count) {
+      if (!filterDots) return;
       filterDots.innerHTML = "";
       for (var i = 0; i < count; i += 1) {
         var dot = document.createElement("button");
@@ -149,8 +119,8 @@
         });
         filterDots.appendChild(dot);
       }
-      filterPrev.disabled = page <= 0;
-      filterNext.disabled = page >= count - 1;
+      if (filterPrev) filterPrev.disabled = page <= 0;
+      if (filterNext) filterNext.disabled = page >= count - 1;
     }
 
     function moveFilters(page) {
@@ -167,8 +137,24 @@
       moveFilters(Math.floor(active.offsetLeft / filterView.clientWidth));
     }
 
-    filterPrev.addEventListener("click", function () { moveFilters(filterPage - 1); });
-    filterNext.addEventListener("click", function () { moveFilters(filterPage + 1); });
+    function show(slug) {
+      var current = slug || "all";
+      filters.querySelectorAll("button").forEach(function (button) {
+        button.setAttribute("aria-pressed", button.dataset.slug === current ? "true" : "false");
+      });
+      onShow(current);
+      showActiveFilter();
+    }
+
+    filters.addEventListener("click", function (event) {
+      var button = event.target.closest("button");
+      if (!button) return;
+      location.hash = button.dataset.slug === "all" ? "" : button.dataset.slug;
+      show(button.dataset.slug);
+    });
+
+    if (filterPrev) filterPrev.addEventListener("click", function () { moveFilters(filterPage - 1); });
+    if (filterNext) filterNext.addEventListener("click", function () { moveFilters(filterPage + 1); });
     window.addEventListener("resize", function () { moveFilters(filterPage); });
     moveFilters(0);
     if (document.fonts && document.fonts.ready) {
@@ -176,16 +162,155 @@
     }
 
     var hash = location.hash.replace("#", "");
-    var known = window.ROAA_GALLERY.some(function (group) {
+    var known = categories.some(function (group) {
       return group.slug === hash;
     });
     show(known ? hash : "all");
     window.addEventListener("hashchange", function () {
       var next = location.hash.replace("#", "");
-      var exists = window.ROAA_GALLERY.some(function (group) {
+      var exists = categories.some(function (group) {
         return group.slug === next;
       });
       show(exists ? next : "all");
+    });
+  }
+
+  if (galleryRoot && window.ROAA_GALLERY) {
+    initCategoryTabs(window.ROAA_GALLERY, function (current) {
+      galleryRoot.innerHTML = "";
+      window.ROAA_GALLERY.forEach(function (group) {
+        if (current !== "all" && group.slug !== current) return;
+        group.images.forEach(function (src, index) {
+          var button = document.createElement("button");
+          button.type = "button";
+          var img = document.createElement("img");
+          img.src = src;
+          img.alt = group.label + " project " + (index + 1) + " by ROAA";
+          button.appendChild(img);
+          button.addEventListener("click", function () {
+            openLightbox(src, img.alt);
+          });
+          galleryRoot.appendChild(button);
+        });
+      });
+      if (window.ROAAReveal) window.ROAAReveal(galleryRoot);
+    });
+  }
+
+  if (projectsRoot && window.ROAA_PROJECT_CATEGORIES && window.ROAA_PROJECTS) {
+    var corporateSubSlug = "";
+
+    function appendList(section, items) {
+      var list = document.createElement("ul");
+      list.className = "list";
+      items.forEach(function (item) {
+        var li = document.createElement("li");
+        li.textContent = item;
+        list.appendChild(li);
+      });
+      section.appendChild(list);
+    }
+
+    function appendGroupBlock(section, block, withHeading) {
+      if (withHeading) {
+        var heading = document.createElement("h3");
+        heading.textContent = block.title;
+        section.appendChild(heading);
+      }
+      if (block.lede) {
+        var lede = document.createElement("p");
+        lede.className = "lede";
+        lede.textContent = block.lede;
+        section.appendChild(lede);
+      }
+      if (block.items && block.items.length) appendList(section, block.items);
+    }
+
+    function renderCorporateGroup(block) {
+      var wrap = document.createElement("div");
+      wrap.className = "project-subgroup";
+      appendGroupBlock(wrap, block, false);
+      return wrap;
+    }
+
+    function renderProjectCategory(group, options) {
+      var data = window.ROAA_PROJECTS[group.slug] || {};
+      var section = document.createElement("section");
+      section.className = "project-category section";
+      section.id = group.slug;
+
+      var title = document.createElement("h2");
+      title.textContent = group.label + " Projects";
+      section.appendChild(title);
+
+      if (data.groups && data.groups.length) {
+        if (options && options.subtabs) {
+          var subtabs = document.createElement("div");
+          subtabs.className = "filters filters--sub";
+          subtabs.setAttribute("role", "tablist");
+          subtabs.setAttribute("aria-label", group.label + " subcategories");
+
+          var panel = document.createElement("div");
+          panel.className = "project-subpanel";
+
+          var initial = corporateSubSlug;
+          var knownSub = data.groups.some(function (block) {
+            return block.slug === initial;
+          });
+          if (!knownSub) initial = data.groups[0].slug;
+          corporateSubSlug = initial;
+
+          function showSub(slug) {
+            corporateSubSlug = slug;
+            subtabs.querySelectorAll("button").forEach(function (button) {
+              var active = button.dataset.slug === slug;
+              button.setAttribute("aria-pressed", active ? "true" : "false");
+              button.setAttribute("aria-selected", active ? "true" : "false");
+            });
+            var block = data.groups.filter(function (entry) {
+              return entry.slug === slug;
+            })[0];
+            panel.innerHTML = "";
+            if (block) panel.appendChild(renderCorporateGroup(block));
+            if (window.ROAAReveal) window.ROAAReveal(panel);
+          }
+
+          data.groups.forEach(function (block) {
+            var button = document.createElement("button");
+            button.type = "button";
+            button.setAttribute("role", "tab");
+            button.textContent = block.title;
+            button.dataset.slug = block.slug;
+            button.addEventListener("click", function () {
+              showSub(block.slug);
+            });
+            subtabs.appendChild(button);
+          });
+
+          section.appendChild(subtabs);
+          section.appendChild(panel);
+          showSub(initial);
+        } else {
+          data.groups.forEach(function (block) {
+            appendGroupBlock(section, block, true);
+          });
+        }
+      } else if (data.items && data.items.length) {
+        appendList(section, data.items);
+      }
+
+      return section;
+    }
+
+    initCategoryTabs(window.ROAA_PROJECT_CATEGORIES, function (current) {
+      projectsRoot.innerHTML = "";
+      window.ROAA_PROJECT_CATEGORIES.forEach(function (group) {
+        if (current !== "all" && group.slug !== current) return;
+        projectsRoot.appendChild(renderProjectCategory(group, {
+          subtabs: current === group.slug && !!(window.ROAA_PROJECTS[group.slug] || {}).groups
+        }));
+      });
+      if (window.ROAAReveal) window.ROAAReveal(projectsRoot);
     });
   }
 
@@ -228,6 +353,7 @@
   if (form) {
     form.addEventListener("submit", function (event) {
       event.preventDefault();
+      event.stopPropagation();
       var valid = true;
       form.querySelectorAll("[required]").forEach(function (field) {
         var error = field.parentElement.querySelector(".field__error");
@@ -244,16 +370,52 @@
         if (message) valid = false;
       });
       if (!valid) return;
+
       var submit = form.querySelector(".contact-submit");
-      if (!submit) {
-        window.location.href = "thank-you.html";
-        return;
+      if (submit) {
+        submit.classList.add("is-sending");
+        submit.disabled = true;
       }
-      submit.classList.add("is-sending");
-      submit.disabled = true;
-      window.setTimeout(function () {
-        window.location.href = "thank-you.html";
-      }, 560);
+
+      var endpoint = form.getAttribute("data-endpoint") || form.action;
+      var thanksUrl = new URL("thank-you.html", window.location.href).href;
+
+      fetch(endpoint, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" }
+      })
+        .then(function (response) {
+          return response.text().then(function (text) {
+            var payload = {};
+            try { payload = JSON.parse(text); } catch (error) {}
+            return { ok: response.ok, payload: payload, text: text };
+          });
+        })
+        .then(function (result) {
+          var payload = result.payload || {};
+          var success = payload.success === true || payload.success === "true" || /submitted successfully/i.test(result.text || "");
+          if (success) {
+            window.location.replace(thanksUrl);
+            return;
+          }
+          if (submit) {
+            submit.classList.remove("is-sending");
+            submit.disabled = false;
+          }
+          var note = payload.message || "Message could not be sent. Please try again.";
+          if (/activation/i.test(note)) {
+            note = "Check info@roaa-construction.com (and Spam) for a FormSubmit email, click “Activate Form”, then submit again.";
+          }
+          window.alert(note);
+        })
+        .catch(function () {
+          if (submit) {
+            submit.classList.remove("is-sending");
+            submit.disabled = false;
+          }
+          window.alert("Message could not be sent. Please try again or email info@roaa-construction.com.");
+        });
     });
   }
 
@@ -331,8 +493,13 @@
     var photoCount = 0;
     var copySelector = [
       ".hero__copy",
-      ".section__head",
+      ".section__head > .kicker",
+      ".section__head > h2",
+      ".section__head > .rule",
+      ".section__head > .lede",
+      ".stats__item",
       ".service",
+      ".product-tile",
       ".project",
       ".ally",
       ".card",
@@ -342,6 +509,13 @@
       ".filters",
       "section.section > h2",
       "section.section > ul",
+      ".project-category > h2",
+      ".project-category > h3",
+      ".project-category > .lede",
+      ".project-category > .list",
+      ".project-category > .filters--sub",
+      ".project-category > .project-subpanel",
+      ".project-category > .actions",
       ".page-hero > .kicker",
       ".page-hero > h1",
       ".page-hero > .lede",
@@ -423,5 +597,47 @@
       loaderDone = true;
       waitQueue.splice(0).forEach(arm);
     }, loader ? 2200 : 60);
+  }
+
+  var counters = document.querySelectorAll("[data-count]");
+  if (counters.length) {
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function animateCount(node) {
+      if (node.dataset.counted === "1") return;
+      node.dataset.counted = "1";
+      var target = Number(node.getAttribute("data-count")) || 0;
+      var suffix = node.getAttribute("data-suffix") || "";
+      var duration = 1400;
+      var start = null;
+
+      function frame(now) {
+        if (start === null) start = now;
+        var progress = Math.min(1, (now - start) / duration);
+        var value = Math.round(target * easeOutCubic(progress));
+        node.textContent = value + suffix;
+        if (progress < 1) requestAnimationFrame(frame);
+      }
+
+      node.textContent = "0" + suffix;
+      requestAnimationFrame(frame);
+    }
+
+    if ("IntersectionObserver" in window) {
+      var countObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          animateCount(entry.target);
+          countObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.45 });
+      counters.forEach(function (node) {
+        countObserver.observe(node);
+      });
+    } else {
+      counters.forEach(animateCount);
+    }
   }
 })();
