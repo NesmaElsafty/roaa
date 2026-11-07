@@ -349,8 +349,95 @@
     });
   }
 
+  var servicesSearch = document.querySelector("[data-services-search]");
+  if (servicesSearch) {
+    var servicesGrid = document.querySelector("[data-services-grid]");
+    var servicesEmpty = document.querySelector("[data-services-empty]");
+    var serviceCards = servicesGrid ? Array.prototype.slice.call(servicesGrid.querySelectorAll(".service")) : [];
+
+    function filterServices() {
+      var query = servicesSearch.value.trim().toLowerCase();
+      var visible = 0;
+      serviceCards.forEach(function (card) {
+        var title = (card.querySelector("h3") && card.querySelector("h3").textContent) || "";
+        var body = (card.querySelector("p:not(.service__index)") && card.querySelector("p:not(.service__index)").textContent) || "";
+        var match = !query || (title + " " + body).toLowerCase().indexOf(query) !== -1;
+        card.classList.toggle("is-filtered-out", !match);
+        if (match) visible += 1;
+      });
+      if (servicesEmpty) servicesEmpty.hidden = visible > 0;
+    }
+
+    servicesSearch.addEventListener("input", filterServices);
+    servicesSearch.addEventListener("search", filterServices);
+  }
+
   var form = document.querySelector("[data-contact]");
   if (form) {
+    var serviceMap = {
+      "turnkey-finishing": "Turnkey Finishing",
+      "blockwork-masonry": "Blockwork & Masonry",
+      "general-construction": "General Construction",
+      "plastering-rendering": "Plastering & Rendering",
+      "plumbing-sanitary-works": "Plumbing & Sanitary Works",
+      "ceramic-porcelain-tiling": "Ceramic & Porcelain Tiling",
+      "gypsum-board-false-ceilings": "Gypsum Board & False Ceilings",
+      "marble-natural-stone-works": "Marble & Natural Stone Works",
+      "air-conditioning-hvac-systems": "Air Conditioning & HVAC Systems",
+      "fire-alarm-systems": "Fire Alarm Systems",
+      "firefighting-systems": "Firefighting Systems",
+      "interior-exterior-painting": "Interior & Exterior Painting",
+      "electrical-installations-power-systems": "Electrical Installations & Power Systems",
+      "cctv-surveillance-systems": "CCTV & Surveillance Systems",
+      "elevator-installation": "Elevator Installation",
+      "security-reinforced-doors": "Security & Reinforced Doors",
+      "wooden-doors-joinery": "Wooden Doors & Joinery",
+      "kitchen-design-installation": "Kitchen Design & Installation",
+      "curtain-wall-systems": "Curtain Wall Systems",
+      "aluminum-glazing-works": "Aluminum & Glazing Works",
+      "hpl-cladding-partitions": "HPL Cladding & Partitions",
+      "facade-finishing-cladding": "Façade Finishing & Cladding",
+      "hdf-laminate-flooring": "HDF Laminate Flooring",
+      "wooden-flooring-solutions": "Wooden Flooring Solutions"
+    };
+    var inquiryMap = {
+      "other-services": "Other Services"
+    };
+
+    function applyContactContext() {
+      var params = new URLSearchParams(window.location.search);
+      var serviceKey = (params.get("service") || "").trim().toLowerCase();
+      var inquiryKey = (params.get("inquiry") || "").trim().toLowerCase();
+      var serviceField = form.querySelector("[data-service-field]");
+      var inquiryField = form.querySelector("[data-inquiry-field]");
+      var context = form.querySelector("[data-contact-context]");
+      var contextLabel = form.querySelector("[data-contact-context-label]");
+      var contextValue = form.querySelector("[data-contact-context-value]");
+      var serviceName = serviceMap[serviceKey] || "";
+      var inquiryName = inquiryMap[inquiryKey] || "";
+
+      if (serviceField) serviceField.value = serviceName;
+      if (inquiryField) inquiryField.value = inquiryName;
+
+      if (!context || !contextLabel || !contextValue) return;
+
+      if (serviceName) {
+        context.hidden = false;
+        contextLabel.textContent = "Selected Service: ";
+        contextValue.textContent = serviceName;
+      } else if (inquiryName) {
+        context.hidden = false;
+        contextLabel.textContent = "Inquiry: ";
+        contextValue.textContent = inquiryName;
+      } else {
+        context.hidden = true;
+        contextLabel.textContent = "";
+        contextValue.textContent = "";
+      }
+    }
+
+    applyContactContext();
+
     form.addEventListener("submit", function (event) {
       event.preventDefault();
       event.stopPropagation();

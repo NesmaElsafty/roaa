@@ -108,6 +108,12 @@
             <input type="hidden" name="_template" value="table" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="contact-honey" aria-hidden="true" />
+            <input type="hidden" name="service" value="" data-service-field />
+            <input type="hidden" name="inquiry" value="" data-inquiry-field />
+            <p class="contact-context" data-contact-context hidden>
+              <span data-contact-context-label></span>
+              <strong data-contact-context-value></strong>
+            </p>
             <label class="field"><span>Your name</span><input name="name" required autocomplete="name" placeholder="Name" /><p class="field__error" hidden></p></label>
             <label class="field"><span>Your phone</span><input name="phone" type="tel" required autocomplete="tel" placeholder="Phone" /><p class="field__error" hidden></p></label>
             <label class="field"><span>Email</span><input name="email" type="email" required autocomplete="email" placeholder="Email" /><p class="field__error" hidden></p></label>
@@ -118,6 +124,7 @@
                 <option>Hospitality</option>
                 <option>Commercial</option>
                 <option>Residential</option>
+                <option>Other</option>
               </select>
               <p class="field__error" hidden></p>
             </label>
